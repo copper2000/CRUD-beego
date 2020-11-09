@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Are you sure want to delete this?</h1>
+    <form action="/product-delete" method="post">
+        Product ID: <input name="productId" type="text" value="{{.product.ProductId}}"/>
+        Product Name: <input name="productName" type="text" value="{{.product.ProductName}}"/>
+        Product Order <input name="productOrder" type="text" value="{{.product.ProductOrder}}">
+        <input type="submit" value="Delete"/>
+    </form>
+</body>
+</html>

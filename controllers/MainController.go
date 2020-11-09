@@ -58,5 +58,26 @@ func (c *MainController) UpdateProduct() {
 	}
 
 	c.Redirect("product-list", 302)
+}
 
+func (c *MainController) DeleteForm() {
+	id, _ := strconv.Atoi(c.Ctx.Input.Param(":id"))
+
+	c.Data["product"] = repositories.ProductRepository{}.GetProductById(id)
+
+	c.TplName = "product/remove.html"
+}
+
+func (c *MainController) DeleteProduct() {
+	prod := entities.Product{}
+
+	err := c.ParseForm(&prod)
+
+	repositories.ProductRepository{}.DeleteProduct(prod)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	c.Redirect("product-list", 302)
 }
