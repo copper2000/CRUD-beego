@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/product-update" method="post">
+        Product ID: <input name="productId" type="text" value="{{.product.ProductId}}"/>
+        Product Name: <input name="productName" type="text" value="{{.product.ProductName}}"/>
+        Product Order <input name="productOrder" type="text" value="{{.product.ProductOrder}}">
+        <input type="submit" value="Update"/>
+    </form>
+</body>
+</html>
