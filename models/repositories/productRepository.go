@@ -67,10 +67,10 @@ func (p ProductRepository) UpdateProduct(product entities.Product) entities.Prod
 	return product
 }
 
-func (p ProductRepository) DeleteProduct(product entities.Product) bool {
+func (p ProductRepository) DeleteProduct(product *entities.Product) bool {
 	o := orm.NewOrm()
 
-	err := o.Raw("DELETE FROM product WHERE product_id = ?", product.ProductId).QueryRow(&product)
+	err := o.Raw("DELETE FROM product WHERE product_id = ?", product.ProductId).QueryRow(product)
 
 	if err != nil {
 		fmt.Println("updated fail")
@@ -94,4 +94,3 @@ func (p ProductRepository) GetProductById(id int) entities.Product {
 
 	return products
 }
-

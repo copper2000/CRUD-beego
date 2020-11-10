@@ -37,7 +37,6 @@ func (c *MainController) CreateProduct() {
 
 }
 
-
 func (c *MainController) EditForm() {
 	id, _ := strconv.Atoi(c.Ctx.Input.Param(":id"))
 
@@ -73,7 +72,7 @@ func (c *MainController) DeleteProduct() {
 
 	err := c.ParseForm(&prod)
 
-	repositories.ProductRepository{}.DeleteProduct(prod)
+	repositories.ProductRepository{}.DeleteProduct(&prod)
 
 	if err != nil {
 		fmt.Println(err)
