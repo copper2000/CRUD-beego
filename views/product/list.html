@@ -4,11 +4,58 @@
     <meta charset="UTF-8">
     <title>{{.Title}}</title>
 </head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    .btn-update {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+    .btn-delete {
+        background-color: #c9302c; /* Red */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+    .btn-create {
+        background-color: #2e6da4; /* Blue */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+</style>
 <body>
 <h1>{{.BrandName}}</h1>
-<a href="product-add">Create</a>
+<a class="btn-create" href="product-add">Create</a>
 <br><br>
-<table style="border: 1px solid #cecece">
+<table>
     <thead>
         <tr>
             <th>Product ID</th>
@@ -17,6 +64,7 @@
             <th>Created Date</th>
             <th>Updated Date</th>
             <th>Action</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -28,8 +76,8 @@
                     <td>{{.ProductOrder}}</td>
                     <td>{{.CreatedDate}}</td>
                     <td>{{.UpdatedDate}}</td>
-                    <td><a href="product-edit/{{.ProductId}}">Update</a></td>
-                    <td><a href="product-remove/{{.ProductId}}">Delete</a></td>
+                    <td><a class="btn-update" href="product-edit/{{.ProductId}}">Update</a></td>
+                    <td><a class="btn-delete" href="product-remove/{{.ProductId}}">Delete</a></td>
                 </tr>
             {{end}}
         {{end}}
