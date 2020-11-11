@@ -68,6 +68,7 @@
         </tr>
     </thead>
     <tbody>
+    {{.total}}
         {{if .DataList}}
             {{range .DataList}}
                 <tr>
@@ -83,5 +84,11 @@
         {{end}}
     </tbody>
 </table>
+    {{.CurrentPageSize}}
+    <div>
+        {{range $index := .total}}
+            <a href="/product-list/{{$index}}/2">{{$index}}</a>
+        {{end}}
+    </div>
 </body>
 </html>

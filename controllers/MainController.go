@@ -12,9 +12,16 @@ type MainController struct {
 }
 
 func (c *MainController) GetProductList() {
-	c.Data["DataList"] = repositories.ProductRepository{}.GetAllProduct()
+	var size = c.Ctx.Input.Param(":pageSize")
+	var index = c.Ctx.Input.Param(":pageIndex")
+	pageSize, _ := strconv.Atoi(size)
+	pageIndex, _ := strconv.Atoi(index)
+
 	c.Data["Title"] = "Product Management"
 	c.Data["BrandName"] = "BE GROUP"
+
+	c.Data["CurrentPageSize"] = int64(pageSize)
+	c.Data["DataList"], c.Data["total"] = repositories.ProductRepository{}.PagingProduct(pageIndex, pageSize)
 	c.TplName = productList
 }
 
@@ -79,4 +86,15 @@ func (c *MainController) DeleteProduct() {
 	}
 
 	c.Redirect("product-list", 302)
+}
+
+func (c *MainController) PagingProduct() {
+	var size = c.Ctx.Input.Param(":pageSize")
+	var index = c.Ctx.Input.Param(":pageIndex")
+
+	pageSize, _ := strconv.Atoi(size)
+	pageIndex, _ := strconv.Atoi(index)
+	c.Data["DataPaging"], c.Data["total"] = repositories.ProductRepository{}.PagingProduct(pageIndex, pageSize)
+	c.TplName = "product/remove.html"
+
 }

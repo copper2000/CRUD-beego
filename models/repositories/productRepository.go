@@ -4,6 +4,7 @@ import (
 	"beef/models/entities"
 	"fmt"
 	"github.com/astaxie/beego/orm"
+	"math"
 	"time"
 )
 
@@ -93,4 +94,35 @@ func (p ProductRepository) GetProductById(id int) entities.Product {
 	o.Raw(sql, id).QueryRow(&products)
 
 	return products
+}
+
+func (p ProductRepository) PagingProduct(pageIndex int, pageSize int) (products []entities.Product, total []int64) {
+
+	o := orm.NewOrm()
+
+	// count total records
+	result, err := o.QueryTable("product").Count()
+
+	// count total pages
+	totalPage := int(math.Ceil(float64(result / int64(pageSize))))
+	fmt.Println(totalPage)
+
+	// append record to total array
+	for i := int64(1); i <= int64(totalPage); i++ {
+		total = append(total, i)
+	}
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	qb, _ := orm.NewQueryBuilder("mysql")
+
+	qb.Select("*").From("product").Limit(pageSize).Offset((pageIndex-1)*pageSize)
+
+	sql := qb.String()
+
+	o.Raw(sql).QueryRows(&products)
+
+	return products, total
 }

@@ -39,6 +39,7 @@
 <body>
     <h1>Are you sure want to delete this?</h1>
     <div>
+        {{.DataPaging}}
         <form action="/product-delete" method="post">
             Product Name: <input name="productName" type="text" value="{{.product.ProductName}}"/>
             Product Order <input name="productOrder" type="text" value="{{.product.ProductOrder}}">
