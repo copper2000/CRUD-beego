@@ -25,6 +25,13 @@ func (c *MainController) GetProductList() {
 	c.TplName = productList
 }
 
+func (c *MainController) GetAllProduct() {
+	c.Data["Title"] = "Product Management"
+	c.Data["BrandName"] = "BE GROUP"
+	c.Data["DataList"] = repositories.ProductRepository{}.GetAllProduct()
+	c.TplName = productList
+}
+
 func (c *MainController) CreateForm() {
 	c.TplName = "product/add.html"
 }

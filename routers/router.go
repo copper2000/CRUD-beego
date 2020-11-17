@@ -7,7 +7,8 @@ import (
 
 func init() {
     beego.Router("/", &controllers.MainController{})
-    beego.Router("/product-list/:pageIndex/:pageSize", &controllers.MainController{}, "get:GetProductList")
+   // beego.Router("/product-list/:pageIndex/:pageSize", &controllers.MainController{}, "get:GetProductList")
+	beego.Router("/product-list", &controllers.MainController{}, "get:GetAllProduct")
 
     beego.Router("/product-add", &controllers.MainController{}, "get:CreateForm")
     beego.Router("/product-create", &controllers.MainController{}, "post:CreateProduct")
